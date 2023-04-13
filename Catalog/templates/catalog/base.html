@@ -1,0 +1,15 @@
+{% block content %} {% endblock %}
+
+
+{% if user.is_authenticated %}
+<form action="{% url 'logoutuser'%}" method='POST'>
+    {% csrf_token %} 
+<button type='submit'>Выйти</button>
+</form>
+
+{% else %}
+
+<a href="{% url 'signupuser' %}">Регистрация</a>
+
+
+{% endif %}

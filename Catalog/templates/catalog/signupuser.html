@@ -1,0 +1,18 @@
+
+{% block content %}
+
+<h1>Регистрация</h1>
+
+{% if user.is_authenticated %}
+<h2 style="color: red;">Вы уже зарегистрированы</h2>
+
+{% else %}
+<h2>{{ error }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="sumbit">Зарегистрироваться</button>
+</form>
+{% endif %}
+{% endblock %}
