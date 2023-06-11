@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Creationform(UserCreationForm):
     username = forms.CharField(label='Логин')
-    email = forms.EmailField()
+    email = forms.EmailField(required=True)
     password1 = forms.CharField(label='Пароль')
     password2 = forms.CharField(label='Подтвердите ваш пароль')
 
