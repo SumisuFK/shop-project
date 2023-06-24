@@ -13,13 +13,13 @@ def signupuser(request):
     if request.method == 'GET':
         return render(request, 'catalog/signupuser.html', {'form': Creationform()})
     else:
-        if User.objects.filter(email = email).exists():
-            messages.error(request, 'Пользователь с таким email уже зарегистрирован')
+        if User.objects.filter(email = request.POST['email']).exists():
+            messages.error(request, 'Пользователь с таким email уже зарегистрирован.')
             return redirect('signupuser') 
         else:
             if request.POST['password1'] == request.POST['password2']:
                 try:
-                    user = User.objects.create_user(username = username, email = email ,password = password1)
+                    user = User.objects.create_user(request.POST['username'], request.POST['email'], password = request.POST['password1'])
                     user.save()
                     login(request, user)
                     messages.success(request, 'Вы успешно зарегистрировались')
