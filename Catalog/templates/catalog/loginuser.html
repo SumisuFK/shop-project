@@ -1,7 +1,7 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 
-<h1>Регистрация</h1>
+<h1>Авторизация</h2>
 
 {% if user.is_authenticated %}
 <h2>{{ error }}</h2>
@@ -16,10 +16,11 @@
 </ul>
 {% endif %}
 
-<form method="post">
+<form method='post'>
     {% csrf_token %}
 {{ form.as_p }}
-    <button type="sumbit">Зарегистрироваться</button>
+    <button type='submit'>Авторизироваться</button>
 </form>
+
 {% endif %}
 {% endblock %}
