@@ -1,13 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import Creationform, Authform
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib import messages
+from .models import Product
 
 def home(request):
-    return render(request,'catalog/home.html')
+    products = Product.objects.all()
+    return render(request,'catalog/home.html', {'products': products})
+
+def detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    return render(request, 'catalog/detail.html', {'product': product})
 
 def signupuser(request):
     if request.method == 'GET':

@@ -1,5 +1,10 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 <h1>Главная</h1>
+{% for product in products %}
 
+<a href="{% url 'product:detail' product.id %}"><img src='{{ product.image.url }}'></a>
+<h2>{{ product.title }}</h2>
+
+{% endfor %}
 {% endblock %}
