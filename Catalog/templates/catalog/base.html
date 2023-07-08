@@ -1,7 +1,43 @@
-{% block content %} {% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>ShadowFashion</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'catalog/css/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'catalog/girl-icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'catalog/shopping-bag-icon.png' %}">
+</head>
+<body>
+	<header class="header">
+        <div class="wrapper">
+            <div class="header_wrapper">
+                <div class="header_logo">
+                    <a href="/" class="header_logo-link">
+                        <img src="./static/catalog/girl-icon.png" alt="girl-logo" class="header_logo-pic">ShadowFashion</a>
+                    
+                </div>
+                <nav class="header_nav">
+                    <ul class="header_list">
+                        <li class="header_item">
+                            <a href='#!' class='header_link'>Каталог</a>
+                        </li>
+                        <li class="header_item">
+                            <a href='#!' class='header_link'>Оплата&Доставка</a>
+                        </li>
+                        <li class="header_item">
+                            <a href='#!' class='header_link'>Контакты</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
 
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
 <form action="{% url 'logoutuser'%}" method='POST'>
     {% csrf_token %} 
 <button type='submit'>Выйти</button>
@@ -14,3 +50,9 @@
 
 
 {% endif %}
+
+{% block content %} {% endblock %}
+
+</body>
+</html>
+
