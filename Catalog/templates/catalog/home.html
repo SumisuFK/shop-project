@@ -1,10 +1,24 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
-{% for product in products %}
 
-<a href="{% url 'product:detail' product.id %}"><img src='{{ product.image.url }}'></a>
-<h2>{{ product.title }}</h2>
-<h3>{{ product.price }} р.</h3>
+<div class="products">
+    {% for product in products %}
+    <div class="product-box">
+        <div class="product_image ">
+            <a href="{% url 'product:detail' product.id %}" class="product-pic"><img src='{{ product.image.url }}' alt='product-img' width="237" height="237"></a>
+        </div>
+        <div class="product_text" style="padding-bottom: 20px;">
+            <div class="product_name">
+                <h2>{{ product.title }}</h2>
+            </div>
+            <div class="product_price">
+                <h3>{{ product.price }} р.</h3>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
 
 {% endfor %}
 {% endblock %}

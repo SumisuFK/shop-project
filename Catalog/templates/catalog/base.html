@@ -7,8 +7,16 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>ShadowFashion</title>
     <link rel="stylesheet" type="text/css" href="{% static 'catalog/css/style.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'catalog/girl-icon.png' %}">
-    <link rel="icon" type="image/png" href="{% static 'catalog/shopping-bag-icon.png' %}">
+    <link rel="icon" type="image/jpg" href="{% static 'catalog/logo.jpg' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- CustomStyles -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+
+     <!-- Bootstrap-->
+     {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"> {% endcomment %}
+
 </head>
 <body>
 	<header class="header">
@@ -16,8 +24,11 @@
             <div class="header_wrapper">
                 <div class="header_logo">
                     <a href="/" class="header_logo-link">
-                        <img src="./static/catalog/girl-icon.png" alt="girl-logo" class="header_logo-pic">ShadowFashion</a>
-                    
+                        <img src="./static/catalog/girl-icon.png" alt="girl-logo" width="44" height="44" class="header_logo-pic">
+                    </a>
+                </div>
+                <div class="header_name">
+                    <a href="/" style="color: #000; text-decoration: none;">ShadowFashion</a>
                 </div>
                 <nav class="header_nav">
                     <ul class="header_list">
@@ -30,26 +41,37 @@
                         <li class="header_item">
                             <a href='#!' class='header_link'>Контакты</a>
                         </li>
+                        <li class="header_item">
+                            <a href='#!' class='header_link' style='margin-right: 104px;'>Отзывы</a>
+                        </li>
+                        <li class="header_item">
+                            <a href='#!' class='header_link'>EN</a>
+                        </li>
+                        <li class="header_item1" style='margin-bottom: 10px;'>
+                            <a href='#!' class='shopping_cart-link'>
+                                <img src="./static/catalog/shopping-bag-icon.png" alt="shopping_cart" width="24" height="24" class="shopping_cart">
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-
-    {% if user.is_authenticated %}
-<form action="{% url 'logoutuser'%}" method='POST'>
+{% comment %} 
+{% if user.is_authenticated %}
+    <form action="{% url 'logoutuser'%}" method='POST'>
     {% csrf_token %} 
-<button type='submit'>Выйти</button>
-</form>
+    <button type='submit'>Выйти</button>
+    </form>
 
 {% else %}
 
-<a href="{% url 'signupuser' %}">Регистрация</a>
-<a href="{% url 'loginuser' %}">Авторизация</a>
+    <a href="{% url 'signupuser' %}">Регистрация</a>
+    <a href="{% url 'loginuser' %}">Авторизация</a>
 
 
-{% endif %}
+{% endif %} {% endcomment %}
 
 {% block content %} {% endblock %}
 

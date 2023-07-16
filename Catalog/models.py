@@ -2,7 +2,7 @@ from django.db import models
 
 class Product(models.Model):
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=250)
+    description = models.CharField(max_length=250, blank=True)
     image = models.ImageField(upload_to='Catalog/images/')
     image2 = models.ImageField(upload_to='Catalog/images/', blank=True)
     image3 = models.ImageField(upload_to='Catalog/images/', blank=True)
