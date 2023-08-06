@@ -26,10 +26,19 @@ urlpatterns = [
     # path('signup/', views.signupuser, name='signupuser'),
     # path('logout/', views.logoutuser, name='logoutuser'),
     # path('login/', views.loginuser, name='loginuser'),
+    
+    #Cart
+    path('cart_all/', include('cart.urls', namespace='cart')),
 
     #Catalog
+    
     path('', views.home, name='home'),
     path('product/', include('Catalog.urls')),
     
+    #Tech
+    path('privacy_policy/', views.privacy_policy, name='policy'),
+    path('payment&delivery/', views.delivery, name='delivery'),
+    path('refund', views.refund, name='refund'),
+    path('public_offer', views.public_offer, name='offer')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -10,12 +10,12 @@
     <link rel="icon" type="image/jpg" href="{% static 'catalog/logo.jpg' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- CustomStyles -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
 
-     <!-- Bootstrap-->
-     {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"> {% endcomment %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 
 </head>
 <body>
@@ -23,40 +23,69 @@
         <div class="wrapper">
             <div class="header_wrapper">
                 <div class="header_logo">
-                    <a href="/" class="header_logo-link">
-                        <img src="./static/catalog/girl-icon.png" alt="girl-logo" width="44" height="44" class="header_logo-pic">
+                    <a href="{% url 'home' %}" class="header_logo-link">
+                        <img src="/static/catalog/girl-icon.png" alt="girl-logo" class="header_logo-pic">
                     </a>
                 </div>
                 <div class="header_name">
-                    <a href="/" style="color: #000; text-decoration: none;">ShadowFashion</a>
+                    <a href="{% url 'home' %}" style="color: #000; opacity: 90%;">ShadowFashion</a>
                 </div>
                 <nav class="header_nav">
                     <ul class="header_list">
-                        <li class="header_item">
-                            <a href='#!' class='header_link'>Каталог</a>
+                        <li class="header_item menu-nav__link">
+                            <a href="{% url 'home' %}" class='header_link'>Каталог</a>
                         </li>
-                        <li class="header_item">
-                            <a href='#!' class='header_link'>Оплата&Доставка</a>
+                        <li class="header_item menu-nav__link">
+                            <a href="{% url 'delivery' %}" class='header_link'>Оплата&Доставка</a>
                         </li>
-                        <li class="header_item">
-                            <a href='#!' class='header_link'>Контакты</a>
+                        <li class="header_item menu-nav__link">
+                            <a href='https://vk.com/id325456943' class='header_link' target="blank">Контакты</a>
                         </li>
-                        <li class="header_item">
-                            <a href='#!' class='header_link' style='margin-right: 104px;'>Отзывы</a>
+                        <li class="header_item menu-nav__link">
+                            <a href='https://vk.com/topic-205317172_48184161' class='header_link' style='margin-right: 104px;' target="blank">Отзывы</a>
                         </li>
-                        <li class="header_item">
+                        <li class="header_item menu-nav__link">
                             <a href='#!' class='header_link'>EN</a>
                         </li>
-                        <li class="header_item1" style='margin-bottom: 10px;'>
-                            <a href='#!' class='shopping_cart-link'>
-                                <img src="./static/catalog/shopping-bag-icon.png" alt="shopping_cart" width="24" height="24" class="shopping_cart">
-                            </a>
-                        </li>
+                        {% with total_items=cart|length %}
+                        {% if cart|length > 0 %}
+                            <li class="header_item1 menu-nav__link" style='margin-bottom: 10px;'>
+                                <a href="{% url 'cart:cart_detail' %}" class='shopping_cart-link'>
+                                    <img src="/static/catalog/shopping-bag-icon.png" alt="shopping_cart" class="shopping_cart">
+                                </a>
+                                <a href="{% url 'cart:cart_detail' %}" style="color: #000">{{ total_items }}</a>
+                            </li>
+                        {% else %}
+                            <li class="header_item1 menu-nav__link" style='margin-bottom: 10px;'>
+                                <a href="{% url 'cart:cart_detail' %}" class='shopping_cart-link'>
+                                    <img src="/static/catalog/shopping-bag-icon.png" alt="shopping_cart" class="shopping_cart">
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% endwith %}
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
+
+
+
+{% block content %} {% endblock %}  
+
+    <div class="footer">
+        <ul class="footer_list">
+            <li class="footer_item">
+                <a href="{% url 'policy' %}" class="footer_link">Политика конфиденциальности</a>
+            </li>
+            <li class="footer_item">
+                <a href="{% url 'refund' %}" class="footer_link">Заявление о возврате товара</a>
+            </li>
+            <li class="footer_item">
+                <a href="{% url 'offer' %}" class="footer_link">Публичная оферта</a>
+            </li>
+        </ul>
+    </div>
 
 {% comment %} 
 {% if user.is_authenticated %}
@@ -73,7 +102,7 @@
 
 {% endif %} {% endcomment %}
 
-{% block content %} {% endblock %}
+  
 
 </body>
 </html>

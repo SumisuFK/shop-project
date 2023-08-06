@@ -1,11 +1,60 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 
-<h1>Detail</h1>
+<div class="item">
+    <div class="pic">
+        <a href="{{ product.images.first.image.url }}" data-fancybox="gallery">
+            <img src="{{ product.images.first.image.url }}" alt="product-img" class="pic_size">
+        </a>
+    </div>
+    <div class="product-thumbnails">
+        {% for image in product.images.all %}
+            <a href="{{ image.image.url }}" data-fancybox="gallery" style='margin-right: 2px;'>
+                <img src="{{ image.image.url }}" alt="product-img" class="pics_size">
+            </a>
+        {% endfor %}
+    </div>
 
-<img src='{{ product.image.url }}'>
-<h2>{{ product.title }}</h2>
-<h3>{{ product.price }} р.</h3>
+    <div class="detail">
+        <div style="margin-top: -10%;">
+            <p class="detail__title">{{ product.title }}</p>
+        </div>
+        <p class="detail__price">{{ product.price }} р.</p>
+        <div class="detail_item1">
+            <div class="select-wrapper">
+                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    {% for size in sizes %}
+                        <select>
+                            <option value='size'></option>
+                        </select>
+            </div>
+                {% endfor %}
+        </div>
+        <div class="detail_item2" style="margin-top: 10px;">
+            <input type="submit" value="BUY NOW" class="button1">
+        </div>
+        <div class="detail_item3">
+        <p>{{ product.description }}</p>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("[data-fancybox='gallery']").fancybox({
+            loop: true,
+            buttons: [
+                "zoom",
+                "slideShow",
+                "thumbs",
+                "close"
+            ]
+        });
+    });
+</script>
 
 {% endblock %}
 

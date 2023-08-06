@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib import messages
 from .models import Product
+from cart.forms import CartAddProductForm
 
 def home(request):
     products = Product.objects.all()
@@ -12,7 +13,24 @@ def home(request):
 
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'catalog/detail.html', {'product': product})
+    cart_product_form = CartAddProductForm()
+    return render(request, 'catalog/detail.html', {'product': product, 'cart_product_form': cart_product_form})
+
+def delivery(request):
+    return render(request, 'catalog/payment&delivery.html')
+
+def privacy_policy(request):
+    return render(request, 'catalog/privacy_policy.html')
+
+def refund(request):
+    return render(request, 'catalog/refund.html')
+
+def public_offer(request):
+    return render(request, 'catalog/public_offer.html')
+
+
+
+
 
 # def signupuser(request):
 #     if request.method == 'GET':
