@@ -18,7 +18,7 @@
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 
 </head>
-<body>
+<body style="opacity:0.1; transition:.4s;">
 	<header class="header">
         <div class="wrapper">
             <div class="header_wrapper">
@@ -36,7 +36,7 @@
                             <a href="{% url 'home' %}" class='header_link'>Каталог</a>
                         </li>
                         <li class="header_item menu-nav__link">
-                            <a href="{% url 'delivery' %}" class='header_link'>Оплата&Доставка</a>
+                            <a href="{% url 'delivery' %}" class='header_link'>Оплата & Доставка</a>
                         </li>
                         <li class="header_item menu-nav__link">
                             <a href='https://vk.com/id325456943' class='header_link' target="blank">Контакты</a>
@@ -102,7 +102,12 @@
 
 {% endif %} {% endcomment %}
 
-  
+    
+    <script>
+        $(document).ready(function() {    
+        $("body").css("opacity", "1");
+        });
+    </script>
 
 </body>
 </html>

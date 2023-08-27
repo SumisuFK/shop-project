@@ -6,28 +6,28 @@
     {% for item in cart %}
         {% with product=item.product %}
             <div class="cart_item1">
-                <a href="{% url 'product:detail' product.id %}" class="product-pic"><img src='{{ product.images.first.image.url }}' width="317" height="317" alt='product-img'></a>
-                <a href="{% url 'product:detail' product.id %}" class="product-detail detail__title"><p>{{ product.title }} </p></a>
-                <a href="{% url 'product:detail' product.id %}" class="product-detail" style="font-weight: 300; font-size: 23px;"><p>{{ product.price }} р.</p></a>
+                <a href="{% url 'product:detail' cart_key %}" class="product-pic"><img src='{{ product.images.first.image.url }}' width="317" height="317" alt='product-img'></a>
+                <a href="{% url 'product:detail' cart_key %}" class="product-detail detail__title"><p>{{ product.title }} </p></a>
+                <a href="{% url 'product:detail' cart_key %}" class="product-detail" style="font-weight: 300; font-size: 23px;"><p>{{ product.price }} р.</p></a>
             </div>
         
             <div class="cart_item2">
-                <form action="{% url 'cart:cart_add' product.id %}" method='post'>
+                <form action="{% url 'cart:cart_add' cart_key %}" method='post'>
                     {{ item.update_quantity_form.quantity }}
                     {{ item.update_quantity_form.update }}
                     {{ item.update_quantity_form.size }}
                     <input type='submit' class="button1" style="font-size: 15px;" value="Обновить">
-                    <a href="{% url 'cart:cart_remove' product.id %}">
-                        <input type="submit" class="button1" style="font-size: 15px;" value="Удалить">
-                    </a>
                     {% csrf_token %}
                 </form>
+                <a href="{% url 'cart:cart_remove' cart_key %}">
+                    <input type="submit" class="button1" style="font-size: 15px;" value="Удалить">
+                </a>
             </div>
         {% endwith %}
     {% endfor %}
 </div>
 <div class="buy">
-    <p class="sum">Итого: {{ cart.get_total_price }} </p>
+    <p class="sum">Итого: {{ cart.get_total_price }} р. </p>
     <a href="#!">
         <input type="submit" value="Оформить заказ" class="button1">
     </a>
